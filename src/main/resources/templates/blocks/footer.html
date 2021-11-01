@@ -1,0 +1,27 @@
+<div th:fragment="footer">
+    <style type="text/css">
+        #footer {
+            color: black;
+            position: fixed; /* Фиксированное положение */
+            left: 0;
+            bottom: 0; /* Левый нижний угол */
+        }
+    </style>
+
+    <div class="container" id="footer">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                <span class="link-dark">© 2021 Alexey Sklutov</span>
+            </div>
+
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#"><img src="https://img.icons8.com/material-rounded/24/000000/vk-com.png" width="24" height="24"/></a></li>
+                <li class="ms-3"><a href="#"><img src="https://img.icons8.com/material-outlined/24/000000/instagram-new--v1.png" width="24" height="24"></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><img src="https://img.icons8.com/material-rounded/24/000000/telegram-app.png" width="24" height="24"/></a></li>
+            </ul>
+        </footer>
+    </div>
+</div>
