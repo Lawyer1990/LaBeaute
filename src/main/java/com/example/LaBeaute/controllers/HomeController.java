@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 public class HomeController {
 
     @GetMapping("/")
-    public String home(String name, Model model) {
+    public String home(Model model) {
         model.addAttribute("title", "Home page");
         return "home";
     }
