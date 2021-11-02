@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5" th:each="colums : ${customersId}">
+    <h1>Customers page</h1>
+<li th:text="${colums.name}" />
+    <a th:href="'/customers/'+(${colums.id}+1)">Следующий клиент</a>
+    <a th:href="'/customers/'+(${colums.id}-1)">Предыдущий клиент</a>
+</div>
+
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.example.LaBeaute.controllers;
 
+import com.example.LaBeaute.models.Customers;
 import com.example.LaBeaute.models.Days;
+import com.example.LaBeaute.repo.CustomersRepository;
 import com.example.LaBeaute.repo.DaysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class AdminController {
     @Autowired
     private DaysRepository daysRepository;
 
+    @Autowired
+    private CustomersRepository customersRepository;
 
 
     @GetMapping("/admin")
@@ -28,6 +32,8 @@ public class AdminController {
         model.addAttribute("title","Admin Page");
         Iterable<Days> days = daysRepository.findAll();
         model.addAttribute("days",days);
+        Iterable<Customers> customers = customersRepository.findAll();
+        model.addAttribute("customers",customers);
         return "adminPage";
     }
     @PostMapping("/admin/add")
