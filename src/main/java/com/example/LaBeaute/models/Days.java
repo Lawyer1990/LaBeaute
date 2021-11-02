@@ -7,6 +7,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Days {
+    public Days(){
+
+    }
+    public Days(String data){
+    this.day = data;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
