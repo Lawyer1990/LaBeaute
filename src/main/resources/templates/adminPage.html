@@ -3,18 +3,46 @@
 <head th:insert="blocks/head :: head"/>
 <body>
 <header th:insert="blocks/header :: header"/>
+<h1 th:text="${title}" />
 <div class="container mt-5">
-    <h1>Admin page</h1>
-    <form action="/admin/add" method="post">
-        <input  type="date" name="data"
-                th:value="${dayToday}" th:min="${dayToday}"
-                max="2021-12-31">
-        <button type="submit" class="btn btn-success">Добавить дату</button>
+        <h3 th:text="${titleDays}" />
+            <form action="/admin/add" method="post">
+                <input type="date" name="data"
+                       th:value="${dayToday}" th:min="${dayToday}"
+                       max="2021-12-31">
+                <button type="submit" class="btn btn-success">Добавить дату</button>
+            </form>
+            <div th:each="day : ${days}" class="alert alert-info mt-2">
+                <h3 th:text="${day.day}"/>
+            </div>
+</div>
+<div class="container mt-5">
+    <h3 th:text="${titleCustomers}" />
+    <form action="/admin/addCustomer" method="post">
+        <div class="form-floating">
+            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Password">
+            <label for="floatingName">Имя</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" name="newCustomerEmail" class="form-control" id="floatingEmail" placeholder="name@example.com">
+            <label for="floatingEmail">Email</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить клиента</button>
     </form>
-    <div th:each="day : ${days}" class="alert alert-info mt-2">
-        <h3 th:text="${day.day}"/>
+    <div th:each="customer : ${customers}" class="alert alert-info mt-2">
+        <h2 th:text="'ID:'+${customer.id}"/>
+        <h3 th:text="'Имя:'+${customer.name}"/>
+        <h3 th:text="'Email:'+${customer.email}"/>
+        <h3 th:text="'Password:'+${customer.password}"/>
+        <a th:href="'/admin/'+${customer.id}+'/edit'" class="btn btn-warning">Редактировать</a>
+        <a th:href="'/admin/'+${customer.id}+'/remove'" class="btn btn-warning">Удалить</a>
     </div>
 </div>
+
 <footer th:insert="blocks/footer :: footer"/>
 </body>
 </html>

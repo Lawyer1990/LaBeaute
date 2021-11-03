@@ -32,8 +32,10 @@ public class AdminController {
         model.addAttribute("title","Admin Page");
         Iterable<Days> days = daysRepository.findAll();
         model.addAttribute("days",days);
+        model.addAttribute("titleDays","Days information");
         Iterable<Customers> customers = customersRepository.findAll();
         model.addAttribute("customers",customers);
+        model.addAttribute("titleCustomers","Customers information");
         return "adminPage";
     }
     @PostMapping("/admin/add")
@@ -42,6 +44,11 @@ public class AdminController {
         daysRepository.save(days);
         return "redirect:/admin";
     }
-
+    @PostMapping("/admin/addCustomer")
+    public String addCustomerAdminPage(@RequestParam String newCustomerName, String newCustomerEmail, String newCustomerPassword, Model model) {
+        Customers customers = new Customers(newCustomerName, newCustomerEmail, newCustomerPassword);
+        customersRepository.save(customers);
+        return "redirect:/admin";
+    }
 
 }

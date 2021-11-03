@@ -7,18 +7,21 @@ import javax.persistence.Id;
 
 @Entity
 public class Customers {
-    public Customers(){
+    public Customers() {
 
     }
-    public Customers(String data){
-    this.name = data;
+
+    public Customers(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String login;
+    private String email;
     private String password;
 
     public Long getId() {
@@ -46,11 +49,11 @@ public class Customers {
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
