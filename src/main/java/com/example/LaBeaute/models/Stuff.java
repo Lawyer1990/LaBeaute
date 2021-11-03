@@ -6,16 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Customers {
-    public Customers() {
+public class Stuff {
+    public Stuff() {
 
     }
 
-    public Customers(String name, String email, String password, String number) {
+    public Stuff(String name, String email, String password, String number, int post) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.number = number;
+        this.post = post;
     }
 
     @Id
@@ -25,6 +26,8 @@ public class Customers {
     private String email;
     private String password;
     private String number;
+    private int post;
+
 
     public Long getId() {
         return id;
@@ -43,14 +46,6 @@ public class Customers {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -59,11 +54,27 @@ public class Customers {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getNumber() {
         return number;
     }
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public int getPost() {
+        return post;
+    }
+
+    public void setPost(int post) {
+        this.post = post;
     }
 }

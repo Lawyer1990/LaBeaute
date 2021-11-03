@@ -20,7 +20,7 @@
     <h3 th:text="${titleCustomers}" />
     <form action="/admin/addCustomer" method="post">
         <div class="form-floating">
-            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Password">
+            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Text">
             <label for="floatingName">Имя</label>
         </div>
         <div class="form-floating">
@@ -31,6 +31,10 @@
             <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Пароль</label>
         </div>
+        <div class="form-floating">
+            <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Number">
+            <label for="floatingNumber">Номер телефона</label>
+        </div>
         <button type="submit" class="btn btn-success">Добавить клиента</button>
     </form>
     <div th:each="customer : ${customers}" class="alert alert-info mt-2">
@@ -38,8 +42,29 @@
         <h3 th:text="'Имя:'+${customer.name}"/>
         <h3 th:text="'Email:'+${customer.email}"/>
         <h3 th:text="'Password:'+${customer.password}"/>
-        <a th:href="'/admin/'+${customer.id}+'/edit'" class="btn btn-warning">Редактировать</a>
-        <a th:href="'/admin/'+${customer.id}+'/remove'" class="btn btn-warning">Удалить</a>
+        <h3 th:text="'Phone number:'+${customer.number}"/>
+        <a th:href="'/admin/'+${customer.id}+'/editCustomer'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/admin/'+${customer.id}+'/removeCustomer'" method="post">
+       <button type="submit" class="btn btn-warning">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h3 th:text="${titlePosts}" />
+    <form action="/admin/addPost" method="post">
+        <div class="form-floating">
+            <input type="text" name="newPost" class="form-control" id="floatingPost" placeholder="Text">
+            <label for="floatingName">Название должности</label>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить должность</button>
+    </form>
+    <div th:each="postLoop : ${posts}" class="alert alert-info mt-2">
+        <h2 th:text="'Название должности:'+${postLoop.post}"/>
+        <a th:href="'/admin/'+${postLoop.id}+'/editPosts'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/admin/'+${postLoop.id}+'/removePosts'" method="post">
+            <button type="submit" class="btn btn-warning">Удалить</button>
+        </form>
     </div>
 </div>
 
