@@ -5,7 +5,7 @@
 <header th:insert="blocks/header :: header"/>
 <div class="container mt-5" th:each="postLoop : ${postId}">
     <h3 th:text="${title}" />
-    <form th:action="'/admin/'+${postLoop.id}+'/editPosts'" method="post">
+    <form th:action="'/posts/'+${postLoop.id}+'/editPosts'" method="post">
         <div class="form-floating">
             <input type="text" name="newPost" class="form-control" id="floatingName" placeholder="Password" th:value="${postLoop.post}">
             <label for="floatingName">Название должности</label>

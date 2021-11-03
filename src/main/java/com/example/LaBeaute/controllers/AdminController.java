@@ -43,6 +43,13 @@ public class AdminController {
     private StuffRepository stuffRepository;
 
 
+    @GetMapping("/admin/menu")
+    public String getMainMenuAdminPage(){
+        return "admin/adminMenuPage";
+    }
+
+
+
     @GetMapping("/admin")
     public String doAdminPage(Model model) {
         Calendar calendar = new GregorianCalendar();
@@ -51,12 +58,7 @@ public class AdminController {
         Iterable<Days> days = daysRepository.findAll();
         model.addAttribute("days", days);
         model.addAttribute("titleDays", "Days information");
-        Iterable<Customers> customers = customersRepository.findAll();
-        model.addAttribute("customers", customers);
-        model.addAttribute("titleCustomers", "Customers information");
-        Iterable<Posts> posts = postsRepository.findAll();
-        model.addAttribute("posts", posts);
-        model.addAttribute("titlePosts", "Posts information");
+
         return "adminPage";
     }
 
@@ -67,71 +69,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/admin/addCustomer")
-    public String addCustomerAdminPage(@RequestParam String newCustomerName, String newCustomerEmail, String newCustomerPassword, String newCustomerNumber, Model model) {
-        Customers customers = new Customers(newCustomerName, newCustomerEmail, newCustomerPassword, newCustomerNumber);
-        customersRepository.save(customers);
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/admin/addPost")
-    public String addPostAdminPage(@RequestParam String newPost, Model model) {
-        Posts posts = new Posts(newPost);
-        postsRepository.save(posts);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/admin/{id}/editCustomer")
-    public String doAdminEditCustomerPage(@PathVariable(value = "id") long id, Model model) {
-        model.addAttribute("title", "Edit Customer Page");
-        Optional<Customers> customers = customersRepository.findById(id);
-        ArrayList<Customers> arrayList = new ArrayList<>();
-        customers.ifPresent(arrayList::add);
-        model.addAttribute("customersId", arrayList);
-        return "adminEditCustomerPage";
-    }
-
-    @PostMapping("/admin/{id}/editCustomer")
-    public String updateCustomerAdminPage(@PathVariable(value = "id") long id, @RequestParam String newCustomerName, String newCustomerEmail, String newCustomerPassword, String newCustomerNumber, Model model) {
-        Customers customers = customersRepository.findById(id).orElseThrow();
-        customers.setEmail(newCustomerEmail);
-        customers.setName(newCustomerName);
-        customers.setPassword(newCustomerPassword);
-        customers.setNumber(newCustomerNumber);
-        customersRepository.save(customers);
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/admin/{id}/removeCustomer")
-    public String removeCustomerAdminPage(@PathVariable(value = "id") long id, Model model) {
-        Customers customers = customersRepository.findById(id).orElseThrow();
-        customersRepository.delete(customers);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/admin/{id}/editPosts")
-    public String doAdminEditPostPage(@PathVariable(value = "id") long id, Model model) {
-        model.addAttribute("title", "Update Post Page");
-        Optional<Posts> post = postsRepository.findById(id);
-        ArrayList<Posts> arrayList = new ArrayList<>();
-        post.ifPresent(arrayList::add);
-        model.addAttribute("postId", arrayList);
-        return "adminEditPostPage";
-    }
-
-    @PostMapping("/admin/{id}/editPosts")
-    public String updatePostAdminPage(@PathVariable(value = "id") long id, @RequestParam String newPost, Model model) {
-        Posts posts = postsRepository.findById(id).orElseThrow();
-        posts.setPost(newPost);
-        postsRepository.save(posts);
-        return "redirect:/admin";
-    }
 
 
-    @PostMapping("/admin/{id}/removePosts")
-    public String removePostAdminPage(@PathVariable(value = "id") long id, Model model) {
-        Posts posts = postsRepository.findById(id).orElseThrow();
-        postsRepository.delete(posts);
-        return "redirect:/admin";
-    }
+
+
+
 }

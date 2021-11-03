@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5">
+    <h3 th:text="${titleCustomers}" />
+    <form action="/customers/add" method="post">
+        <div class="form-floating">
+            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Text">
+            <label for="floatingName">Имя</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" name="newCustomerEmail" class="form-control" id="floatingEmail" placeholder="name@example.com">
+            <label for="floatingEmail">Email</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Number">
+            <label for="floatingNumber">Номер телефона</label>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить клиента</button>
+    </form>
+    <div th:each="customer : ${customers}" class="alert alert-info mt-2">
+        <h2 th:text="'ID:'+${customer.id}"/>
+        <h3 th:text="'Имя:'+${customer.name}"/>
+        <h3 th:text="'Email:'+${customer.email}"/>
+        <h3 th:text="'Password:'+${customer.password}"/>
+        <h3 th:text="'Phone number:'+${customer.number}"/>
+        <a th:href="'/customers/'+${customer.id}+'/edit'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/customers/'+${customer.id}+'/remove'" method="post">
+            <button type="submit" class="btn btn-warning">Удалить</button>
+        </form>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5">
+    <h3 th:text="${titlePosts}" />
+    <form action="/posts/add" method="post">
+        <div class="form-floating">
+            <input type="text" name="newPost" class="form-control" id="floatingPost" placeholder="Text">
+            <label for="floatingPost">Название должности</label>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить должность</button>
+    </form>
+    <div th:each="postLoop : ${posts}" class="alert alert-info mt-2">
+        <h2 th:text="'Название должности:'+${postLoop.post}"/>
+        <a th:href="'/posts/'+${postLoop.id}+'/editPosts'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/posts/'+${postLoop.id}+'/removePosts'" method="post">
+            <button type="submit" class="btn btn-warning">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>

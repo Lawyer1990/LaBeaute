@@ -5,7 +5,7 @@
 <header th:insert="blocks/header :: header"/>
 <div class="container mt-5" th:each="customer : ${customersId}">
     <h3 th:text="${title}" />
-    <form th:action="'/admin/'+${customer.id}+'/editCustomer'" method="post">
+    <form th:action="'/customers/'+${customer.id}+'/edit'" method="post">
         <div class="form-floating">
             <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Password" th:value="${customer.name}">
             <label for="floatingName">Имя</label>
@@ -17,6 +17,10 @@
         <div class="form-floating">
             <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password" th:value="${customer.password}">
             <label for="floatingPassword">Пароль</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Numbers" th:value="${customer.number}">
+            <label for="floatingPassword">Номер телефона</label>
         </div>
         <button type="submit" class="btn btn-success">Обновить</button>
     </form>
