@@ -22,7 +22,7 @@
             <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Number">
             <label for="floatingNumber">Номер телефона</label>
         </div>
-        <button type="submit" class="btn btn-success">Добавить клиента</button>
+        <button type="submit" class="btn btn-lg btn-primary">Добавить клиента</button>
     </form>
     <div th:each="customer : ${customers}" class="alert alert-info mt-2">
         <h2 th:text="'ID:'+${customer.id}"/>
@@ -30,9 +30,9 @@
         <h3 th:text="'Email:'+${customer.email}"/>
         <h3 th:text="'Password:'+${customer.password}"/>
         <h3 th:text="'Phone number:'+${customer.number}"/>
-        <a th:href="'/customers/'+${customer.id}+'/edit'" class="btn btn-warning">Редактировать</a>
+        <a th:href="'/customers/'+${customer.id}+'/edit'" class="btn btn-lg btn-primary">Редактировать</a>
         <form th:action="'/customers/'+${customer.id}+'/remove'" method="post">
-            <button type="submit" class="btn btn-warning">Удалить</button>
+            <button type="submit" class="btn btn-lg btn-warning">Удалить</button>
         </form>
     </div>
 </div>

@@ -1,9 +1,6 @@
 package com.example.LaBeaute.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Stuff {
@@ -11,12 +8,13 @@ public class Stuff {
 
     }
 
-    public Stuff(String name, String email, String password, String number, int post) {
+    public Stuff(String name, String email, String password, String number, Posts post_id) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.number = number;
-        this.post = post;
+        this.post_id = post_id;
+
     }
 
     @Id
@@ -26,7 +24,8 @@ public class Stuff {
     private String email;
     private String password;
     private String number;
-    private int post;
+    @ManyToOne
+    private Posts post_id;
 
 
     public Long getId() {
@@ -70,11 +69,12 @@ public class Stuff {
         this.number = number;
     }
 
-    public int getPost() {
-        return post;
+
+    public Posts getPost_id() {
+        return post_id;
     }
 
-    public void setPost(int post) {
-        this.post = post;
+    public void setPost_id(Posts post_id) {
+        this.post_id = post_id;
     }
 }

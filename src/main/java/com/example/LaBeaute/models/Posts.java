@@ -1,9 +1,7 @@
 package com.example.LaBeaute.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Posts {
@@ -19,6 +17,8 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String post;
+    @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<Stuff> stuffs;
 
 
     public Long getId() {

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5">
+    <h3 th:text="${titleStuff}" />
+    <form action="/stuff/add" method="post">
+        <div class="form-floating">
+            <input type="text" name="newStuffName" class="form-control" id="floatingName" placeholder="Text">
+            <label for="floatingName">Имя</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" name="newStuffEmail" class="form-control" id="floatingEmail" placeholder="name@example.com">
+            <label for="floatingEmail">Email</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newStuffPassword" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="newStuffNumber" class="form-control" id="floatingNumber" placeholder="Number">
+            <label for="floatingNumber">Номер телефона</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="newStuffPost">
+                <option th:each="postI: ${post}" th:value="${postI.id}" th:text="${postI.post}" />
+            </select>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Добавить работника</button>
+    </form>
+    <div th:each="stuff : ${stuff}" class="alert alert-info mt-2">
+        <h2 th:text="'ID: '+${stuff.id}"/>
+        <h3 th:text="'Имя: '+${stuff.name}"/>
+        <h3 th:text="'Email: '+${stuff.email}"/>
+        <h3 th:text="'Password: '+${stuff.password}"/>
+        <h3 th:text="'Номер телефона: '+${stuff.number}"/>
+        <h3 th:text="'Должность: '+${stuff.post_id}"/>
+        <a th:href="'/stuff/'+${stuff.id}+'/edit'" class="btn btn-lg btn-primary">Редактировать</a>
+        <form th:action="'/stuff/'+${stuff.id}+'/remove'" method="post">
+            <button type="submit" class="btn btn-lg btn-warning">Удалить</button>
+        </form>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>

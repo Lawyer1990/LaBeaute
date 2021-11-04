@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5" th:each="serviceLoop : ${serviceId}">
+    <h3 th:text="${title}" />
+    <form th:action="'/services/'+${serviceLoop.id}+'/edit'" method="post">
+        <div class="form-floating">
+            <input type="text" name="newService" class="form-control" id="floatingName" placeholder="Password" th:value="${serviceLoop.service}">
+            <label for="floatingName">Название услуги</label>
+        </div>
+        <button type="submit" class="btn btn-success">Обновить</button>
+    </form>
+</div>
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>
