@@ -20,14 +20,17 @@ public class StuffController {
     @Autowired
     private StuffRepository stuffRepository;
 
+
     @Autowired
     private PostsRepository postsRepository;
 
 
     @GetMapping("/stuff")
     public String showCustomers(Model model) {
+        Stuff stuff1 = new Stuff();
         Iterable<Stuff> stuff = stuffRepository.findAll();
         Iterable<Posts> posts = postsRepository.findAll();
+
         model.addAttribute("stuff", stuff);
         model.addAttribute("post", posts);
         model.addAttribute("titleStuff", "Информация о работниках");
@@ -37,7 +40,7 @@ public class StuffController {
 
     @PostMapping("/stuff/add")
     public String addCustomerAdminPage(@RequestParam String newStuffName, String
-            newStuffEmail, String newStuffPassword, String newStuffNumber, Posts newStuffPost, Model model) {
+            newStuffEmail, String newStuffPassword, String newStuffNumber, int newStuffPost, Model model) {
         Stuff stuff = new Stuff(newStuffName, newStuffEmail, newStuffPassword, newStuffNumber, newStuffPost);
         stuffRepository.save(stuff);
         return "redirect:/stuff";
@@ -55,7 +58,9 @@ public class StuffController {
     }
 
     @PostMapping("/stuff/{id}/edit")
-    public String updateCustomerAdminPage(@PathVariable(value = "id") long id, @RequestParam String newCustomerName, String newCustomerEmail, String newCustomerPassword, String newCustomerNumber, Posts newStuffPost, Model model) {
+    public String updateCustomerAdminPage(@PathVariable(value = "id") long id, @RequestParam String newCustomerName,
+                                          String newCustomerEmail, String newCustomerPassword,
+                                          String newCustomerNumber, int newStuffPost, Model model) {
         Stuff stuff = stuffRepository.findById(id).orElseThrow();
         stuff.setName(newCustomerName);
         stuff.setEmail(newCustomerEmail);

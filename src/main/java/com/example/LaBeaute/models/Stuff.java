@@ -8,7 +8,7 @@ public class Stuff {
 
     }
 
-    public Stuff(String name, String email, String password, String number, Posts post_id) {
+    public Stuff(String name, String email, String password, String number, int post_id) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -24,8 +24,11 @@ public class Stuff {
     private String email;
     private String password;
     private String number;
-    @ManyToOne
-    private Posts post_id;
+    private int post_id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_name")
+    private Posts post_name;
 
 
     public Long getId() {
@@ -70,11 +73,20 @@ public class Stuff {
     }
 
 
-    public Posts getPost_id() {
+    public int getPost_id() {
         return post_id;
     }
 
-    public void setPost_id(Posts post_id) {
+    public void setPost_id(int post_id) {
         this.post_id = post_id;
+    }
+
+
+    public Posts getPost_name() {
+        return post_name;
+    }
+
+    public void setPost_name(Posts post_name) {
+        this.post_name = post_name;
     }
 }

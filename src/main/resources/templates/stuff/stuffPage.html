@@ -29,15 +29,15 @@
         </div>
         <button type="submit" class="btn btn-lg btn-primary">Добавить работника</button>
     </form>
-    <div th:each="stuff : ${stuff}" class="alert alert-info mt-2">
-        <h2 th:text="'ID: '+${stuff.id}"/>
-        <h3 th:text="'Имя: '+${stuff.name}"/>
-        <h3 th:text="'Email: '+${stuff.email}"/>
-        <h3 th:text="'Password: '+${stuff.password}"/>
-        <h3 th:text="'Номер телефона: '+${stuff.number}"/>
-        <h3 th:text="'Должность: '+${stuff.post_id}"/>
-        <a th:href="'/stuff/'+${stuff.id}+'/edit'" class="btn btn-lg btn-primary">Редактировать</a>
-        <form th:action="'/stuff/'+${stuff.id}+'/remove'" method="post">
+    <div th:each="stuffId : ${stuff}" class="alert alert-info mt-2">
+        <h2 th:text="'ID: '+${stuffId.id}"/>
+        <h3 th:text="'Имя: '+${stuffId.name}"/>
+        <h3 th:text="'Email: '+${stuffId.email}"/>
+        <h3 th:text="'Password: '+${stuffId.password}"/>
+        <h3 th:text="'Номер телефона: '+${stuffId.number}"/>
+        <h3 th:text="'Должность: '+${stuffId.post_name.post}"/>
+        <a th:href="'/stuff/'+${stuffId.id}+'/edit'" class="btn btn-lg btn-primary">Редактировать</a>
+        <form th:action="'/stuff/'+${stuffId.id}+'/remove'" method="post">
             <button type="submit" class="btn btn-lg btn-warning">Удалить</button>
         </form>
     </div>

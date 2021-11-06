@@ -9,8 +9,14 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackageClasses = AppErrorController.class)
 public class LaBeauteApplication {
 
+
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(LaBeauteApplication.class, args);
+
 	}
+
+
 
 }

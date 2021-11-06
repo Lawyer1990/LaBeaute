@@ -1,6 +1,7 @@
 package com.example.LaBeaute.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,8 +18,10 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String post;
-    @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Stuff> stuffs;
+
+    @OneToMany(mappedBy = "post_name",cascade = CascadeType.ALL)
+    private Set<Stuff> stuff = new HashSet<>();
+
 
 
     public Long getId() {
@@ -36,5 +39,14 @@ public class Posts {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+
+    public Set<Stuff> getStuff() {
+        return stuff;
+    }
+
+    public void setStuff(Set<Stuff> stuff) {
+        this.stuff = stuff;
     }
 }
