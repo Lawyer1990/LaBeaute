@@ -1,8 +1,8 @@
 package com.example.LaBeaute.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Posts {
@@ -20,9 +20,12 @@ public class Posts {
     private String post;
 
     @OneToMany(mappedBy = "post_name",cascade = CascadeType.ALL)
-    private Set<Stuff> stuff = new HashSet<>();
+    private List<Stuff> stuff = new ArrayList<>();
 
-
+    public void addStuffPost(Stuff stuff_id){
+        this.stuff.add(stuff_id);
+        stuff_id.setPost_name(this);
+    }
 
     public Long getId() {
         return id;
@@ -41,12 +44,4 @@ public class Posts {
         this.post = post;
     }
 
-
-    public Set<Stuff> getStuff() {
-        return stuff;
-    }
-
-    public void setStuff(Set<Stuff> stuff) {
-        this.stuff = stuff;
-    }
 }
