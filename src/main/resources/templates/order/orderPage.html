@@ -39,10 +39,10 @@
     <div th:each="orderLoop : ${order}" class="alert alert-info mt-2">
         <h2 th:text="'Дата: '+${orderLoop.data}"/>
         <h2 th:text="'Время: '+${orderLoop.time}"/>
-        <h2 th:text="'Статус: '+${orderLoop.status_id.status}"/>
-        <h2 th:text="'Имя работника: '+${orderLoop.stuff_id.name}"/>
-        <h2 th:text="'Услуга: '+${orderLoop.service_id.service}"/>
-        <h2 th:text="'Имя клиента: '+${orderLoop.name_customer_id.name}"/>
+        <h2 th:text="'Статус: '+${orderLoop.status.status}"/>
+        <h2 th:text="'Имя работника: '+${orderLoop.stuff_name.name}"/>
+        <h2 th:text="'Услуга: '+${orderLoop.service.service}"/>
+        <h2 th:text="'Имя клиента: '+${orderLoop.customers_name.name}"/>
         <a th:href="'/posts/'+${orderLoop.id}+'/editPosts'" class="btn btn-warning">Редактировать</a>
         <form th:action="'/posts/'+${orderLoop.id}+'/removePosts'" method="post">
             <button type="submit" class="btn btn-warning">Удалить</button>

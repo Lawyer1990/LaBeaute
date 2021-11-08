@@ -1,9 +1,7 @@
 package com.example.LaBeaute.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Statuses {
@@ -20,6 +18,8 @@ public class Statuses {
     private Long id;
     private String status;
 
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
+    private List<Order> order;
 
     public Long getId() {
         return id;

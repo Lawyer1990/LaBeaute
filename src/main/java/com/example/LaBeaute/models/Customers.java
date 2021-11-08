@@ -1,9 +1,7 @@
 package com.example.LaBeaute.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customers {
@@ -25,6 +23,9 @@ public class Customers {
     private String email;
     private String password;
     private String number;
+
+    @OneToMany(mappedBy = "customers_name", cascade = CascadeType.ALL)
+    private List<Order> order;
 
 
     public Long getId() {

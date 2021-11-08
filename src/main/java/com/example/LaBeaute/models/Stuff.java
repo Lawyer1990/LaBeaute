@@ -1,6 +1,7 @@
 package com.example.LaBeaute.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Stuff {
@@ -26,6 +27,9 @@ public class Stuff {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_name")
     private Posts post_name;
+
+    @OneToMany(mappedBy = "stuff_name", cascade = CascadeType.ALL)
+    private List<Order> order;
 
     public Long getId() {
         return id;
