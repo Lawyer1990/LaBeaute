@@ -23,14 +23,6 @@ public class StuffController {
     private PostsRepository postsRepository;
 
 
-    @GetMapping("{id}")
-    public String changeId(@PathVariable(value = "id") long id, Model model){
-        Stuff stuff = stuffRepository.findById(id).orElseThrow();
-        Posts posts = new Posts();
-        posts.addStuffPost(stuff);
-        return "stuff/stuffPage";
-    }
-
     @GetMapping
     public String showCustomers(Model model) {
         Iterable<Stuff> stuff = stuffRepository.findAll();
@@ -60,8 +52,10 @@ public class StuffController {
     public String doAdminEditCustomerPage(@PathVariable(value = "id") long id, Model model) {
         model.addAttribute("title", "Редактировать информацию о работниках");
         Optional<Stuff> stuff = stuffRepository.findById(id);
+        Iterable<Posts> posts = postsRepository.findAll();
         ArrayList<Stuff> arrayList = new ArrayList<>();
         stuff.ifPresent(arrayList::add);
+        model.addAttribute("post", posts);
         model.addAttribute("stuffId", arrayList);
         return "stuff/updateStuffPage";
     }
@@ -69,13 +63,15 @@ public class StuffController {
     @PostMapping("{id}/edit")
     public String updateCustomerAdminPage(@PathVariable(value = "id") long id, @RequestParam String newCustomerName,
                                           String newCustomerEmail, String newCustomerPassword,
-                                          String newCustomerNumber, Posts newStuffPost, Model model) {
+                                          String newCustomerNumber, long newStuffPost, Model model) {
         Stuff stuff = stuffRepository.findById(id).orElseThrow();
+        Posts posts = new Posts();
+        posts.setId(newStuffPost);
+        stuff.setPost_name(posts);
         stuff.setName(newCustomerName);
         stuff.setEmail(newCustomerEmail);
         stuff.setPassword(newCustomerPassword);
         stuff.setNumber(newCustomerNumber);
-        stuff.setPost_name(newStuffPost);
         stuffRepository.save(stuff);
         return "redirect:/stuff";
     }

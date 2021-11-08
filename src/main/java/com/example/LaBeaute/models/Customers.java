@@ -26,6 +26,7 @@ public class Customers {
     private String password;
     private String number;
 
+
     public Long getId() {
         return id;
     }
@@ -66,4 +67,6 @@ public class Customers {
     public void setNumber(String number) {
         this.number = number;
     }
+
+
 }

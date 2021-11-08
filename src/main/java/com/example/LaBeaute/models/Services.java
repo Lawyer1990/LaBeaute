@@ -20,7 +20,6 @@ public class Services {
     private Long id;
     private String service;
 
-
     public Long getId() {
         return id;
     }
@@ -37,4 +36,6 @@ public class Services {
     public void setService(String service) {
         this.service = service;
     }
+
+
 }

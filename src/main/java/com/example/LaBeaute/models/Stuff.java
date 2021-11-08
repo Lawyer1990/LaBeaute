@@ -27,10 +27,6 @@ public class Stuff {
     @JoinColumn(name = "post_name")
     private Posts post_name;
 
-
-
-
-
     public Long getId() {
         return id;
     }

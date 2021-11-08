@@ -22,10 +22,6 @@ public class Posts {
     @OneToMany(mappedBy = "post_name",cascade = CascadeType.ALL)
     private List<Stuff> stuff = new ArrayList<>();
 
-    public void addStuffPost(Stuff stuff_id){
-        this.stuff.add(stuff_id);
-        stuff_id.setPost_name(this);
-    }
 
     public Long getId() {
         return id;

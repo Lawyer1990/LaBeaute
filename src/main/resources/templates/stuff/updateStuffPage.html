@@ -3,24 +3,29 @@
 <head th:insert="blocks/head :: head"/>
 <body>
 <header th:insert="blocks/header :: header"/>
-<div class="container mt-5" th:each="customer : ${customersId}">
+<div class="container mt-5" th:each="stuffId : ${stuffId}">
     <h3 th:text="${title}" />
-    <form th:action="'/customers/'+${customer.id}+'/edit'" method="post">
+    <form th:action="'/stuff/'+${stuffId.id}+'/edit'" method="post">
         <div class="form-floating">
-            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Password" th:value="${customer.name}">
+            <input type="text" name="newCustomerName" class="form-control" id="floatingName" placeholder="Password" th:value="${stuffId.name}">
             <label for="floatingName">Имя</label>
         </div>
         <div class="form-floating">
-            <input type="email" name="newCustomerEmail" class="form-control" id="floatingEmail" placeholder="name@example.com" th:value="${customer.email}">
+            <input type="email" name="newCustomerEmail" class="form-control" id="floatingEmail" placeholder="name@example.com" th:value="${stuffId.email}">
             <label for="floatingEmail">Email</label>
         </div>
         <div class="form-floating">
-            <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password" th:value="${customer.password}">
+            <input type="text" name="newCustomerPassword" class="form-control" id="floatingPassword" placeholder="Password" th:value="${stuffId.password}">
             <label for="floatingPassword">Пароль</label>
         </div>
         <div class="form-floating">
-            <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Numbers" th:value="${customer.number}">
+            <input type="text" name="newCustomerNumber" class="form-control" id="floatingNumber" placeholder="Numbers" th:value="${stuffId.number}">
             <label for="floatingPassword">Номер телефона</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="newStuffPost">
+                <option th:each="postI: ${post}" th:value="${postI.id}" th:text="${postI.post}" />
+            </select>
         </div>
         <button type="submit" class="btn btn-success">Обновить</button>
     </form>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="blocks/head :: head"/>
+<body>
+<header th:insert="blocks/header :: header"/>
+<div class="container mt-5">
+    <h3 th:text="${title}" />
+    <form action="/order/add" method="post">
+        <div class="form-floating">
+            <input type="text" name="data" class="form-control" id="data" placeholder="Text">
+            <label for="data">Дата</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="time" class="form-control" id="time" placeholder="Text">
+            <label for="time">Время</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="status">
+                <option th:each="statusId: ${status}" th:value="${statusId.id}" th:text="${statusId.status}" />
+            </select>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="nameStuff">
+                <option th:each="stuffId: ${stuff}" th:value="${stuffId.id}" th:text="${stuffId.name}" />
+            </select>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="service">
+                <option th:each="serviceId: ${service}" th:value="${serviceId.id}" th:text="${serviceId.service}" />
+            </select>
+        </div>
+        <div class="form-floating">
+            <select class="form-control" name="customer">
+                <option th:each="customerId: ${customer}" th:value="${customerId.id}" th:text="${customerId.name}" />
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить заказ</button>
+    </form>
+    <div th:each="orderLoop : ${order}" class="alert alert-info mt-2">
+        <h2 th:text="'Дата: '+${orderLoop.data}"/>
+        <h2 th:text="'Время: '+${orderLoop.time}"/>
+        <h2 th:text="'Статус: '+${orderLoop.status_id.status}"/>
+        <h2 th:text="'Имя работника: '+${orderLoop.stuff_id.name}"/>
+        <h2 th:text="'Услуга: '+${orderLoop.service_id.service}"/>
+        <h2 th:text="'Имя клиента: '+${orderLoop.name_customer_id.name}"/>
+        <a th:href="'/posts/'+${orderLoop.id}+'/editPosts'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/posts/'+${orderLoop.id}+'/removePosts'" method="post">
+            <button type="submit" class="btn btn-warning">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer"/>
+</body>
+</html>
