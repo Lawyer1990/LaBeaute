@@ -4,10 +4,12 @@
 <body>
 <header th:insert="blocks/header :: header"/>
 <div class="container mt-5">
-    <h3 th:text="${title}" />
+    <font th:color="${color}"><h3 th:text="${titleOnPage}"/></font>
+    <font th:color="${color}"><h3 th:each="arrayListId: ${arrayList}" th:text="${arrayListId}"/></font>
     <form action="/order/add" method="post">
         <div class="form-floating">
-            <input type="text" name="data" class="form-control" id="data" placeholder="Text">
+            <input type="date" name="data" class="form-control" id="data" placeholder="Text" th:value="${dayToday}" th:min="${dayToday}"
+                   max="2021-12-31">
             <label for="data">Дата</label>
         </div>
         <div class="form-floating">
@@ -34,9 +36,10 @@
             </select>
         </div>
         <div class="form-floating">
-            <select class="form-control" name="customer">
+            <select class="form-control" name="customer" id="customer" placeholder="Text">
                 <option th:each="customerId: ${customer}" th:value="${customerId.id}" th:text="${customerId.name}" />
             </select>
+            <label for="customer">Клиент</label>
         </div>
         <button type="submit" class="btn btn-success">Добавить заказ</button>
     </form>
