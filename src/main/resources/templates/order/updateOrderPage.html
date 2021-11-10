@@ -3,19 +3,19 @@
 <head th:insert="blocks/head :: head"/>
 <body>
 <header th:insert="blocks/header :: header"/>
-<div class="container mt-5">
+<div class="container mt-5" th:each="order : ${orderId}">
     <h3 th:text="${title}" />
-    <form action="/order/add" method="post">
+    <form th:action="'/order/'+${order.id}+'/edit'" method="post">
         <div class="form-floating">
-            <input type="text" name="data" class="form-control" id="data" placeholder="Text">
+            <input type="data" name="data" class="form-control" id="data" placeholder="data" th:value="${order.data}">
             <label for="data">Дата</label>
         </div>
         <div class="form-floating">
-            <input type="time" name="time1" class="form-control" id="time1" placeholder="Text">
+            <input type="time" name="time1" class="form-control" id="time1" placeholder="time1" th:value="${order.time1}">
             <label for="time1">Время начала работы</label>
         </div>
         <div class="form-floating">
-            <input type="time" name="time2" class="form-control" id="time2" placeholder="Text">
+            <input type="time" name="time2" class="form-control" id="time2" placeholder="time2" th:value="${order.time2}">
             <label for="time2">Время окончания работы</label>
         </div>
         <div class="form-floating">
@@ -38,22 +38,9 @@
                 <option th:each="customerId: ${customer}" th:value="${customerId.id}" th:text="${customerId.name}" />
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Добавить заказ</button>
+        <button type="submit" class="btn btn-success">Обновить</button>
     </form>
-    <div th:each="orderLoop : ${order}" class="alert alert-info mt-2">
-        <h2 th:text="'Дата: '+${orderLoop.data}"/>
-        <h2 th:text="'Время: '+${orderLoop.time1}+' - '+${orderLoop.time2}"/>
-        <h2 th:text="'Статус: '+${orderLoop.status.status}"/>
-        <h2 th:text="'Имя работника: '+${orderLoop.stuff_name.name}"/>
-        <h2 th:text="'Услуга: '+${orderLoop.service.service}"/>
-        <h2 th:text="'Имя клиента: '+${orderLoop.customers_name.name}"/>
-        <a th:href="'/order/'+${orderLoop.id}+'/edit'" class="btn btn-warning">Редактировать</a>
-        <form th:action="'/order/'+${orderLoop.id}+'/remove'" method="post">
-            <button type="submit" class="btn btn-warning">Удалить</button>
-        </form>
     </div>
-</div>
-
 <footer th:insert="blocks/footer :: footer"/>
 </body>
 </html>

@@ -10,12 +10,19 @@ public class Order {
     }
 
 
+    public Order(String data, String time1, String time2) {
+        this.data = data;
+        this.time1 = time1;
+        this.time2 = time2;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String data;
-    private String time;
+
+    private String time1;
+    private String time2;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Statuses status;
@@ -28,6 +35,8 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Customers customers_name;
+
+
 
     public Long getId() {
         return id;
@@ -78,12 +87,18 @@ public class Order {
     public void setCustomers_name(Customers customers_name) {
         this.customers_name = customers_name;
     }
-
-    public String getTime() {
-        return time;
+    public String getTime1() {
+        return time1;
+    }
+    public void setTime1(String time1) {
+        this.time1 = time1;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getTime2() {
+        return time2;
+    }
+
+    public void setTime2(String time2) {
+        this.time2 = time2;
     }
 }
