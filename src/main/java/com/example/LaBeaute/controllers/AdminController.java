@@ -1,7 +1,7 @@
 package com.example.LaBeaute.controllers;
 
 import com.example.LaBeaute.models.Days;
-import com.example.LaBeaute.repo.*;
+import com.example.LaBeaute.repo.DaysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,9 @@ public class AdminController {
 
     @GetMapping("menu")
     public String getMainMenuAdminPage(){
+        OrderController orderController = new OrderController();
+        orderController.clearArrayList1();
+        orderController.setStatusTrue();
         return "admin/adminMenuPage";
     }
 

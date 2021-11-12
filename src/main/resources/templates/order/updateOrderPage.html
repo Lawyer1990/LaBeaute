@@ -4,11 +4,12 @@
 <body>
 <header th:insert="blocks/header :: header"/>
 <div class="container mt-5" th:each="order : ${orderId}">
-    <h3 th:text="${title}" />
+    <font th:color="${color}"><h3 th:text="${titleOnPage}"/></font>
+    <font th:color="${color}"><h3 th:each="arrayListId: ${arrayList}" th:text="${arrayListId}"/></font>
     <form th:action="'/order/'+${order.id}+'/edit'" method="post">
         <div class="form-floating">
-            <input type="data" name="data" class="form-control" id="data" placeholder="data" th:value="${order.data}">
-            <label for="data">Дата</label>
+            <input type="date" name="data" class="form-control" id="date" placeholder="date" th:value="${dayToday}" th:min="${dayToday}">
+            <label for="date">Дата</label>
         </div>
         <div class="form-floating">
             <input type="time" name="time1" class="form-control" id="time1" placeholder="time1" th:value="${order.time1}">
