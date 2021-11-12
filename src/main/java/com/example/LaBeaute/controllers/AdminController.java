@@ -27,7 +27,7 @@ public class AdminController {
     public String getMainMenuAdminPage(){
         OrderController orderController = new OrderController();
         orderController.clearArrayList1();
-        orderController.setStatusTrue();
+        orderController.setStatus(true);;
         return "admin/adminMenuPage";
     }
 

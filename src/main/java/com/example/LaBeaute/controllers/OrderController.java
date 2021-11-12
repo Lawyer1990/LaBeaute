@@ -79,8 +79,12 @@ public class OrderController {
         int time1Eq, time2Eq, dataEq;
         String dataToday = Integer.toString(calendar.get(Calendar.YEAR)) + Integer.toString(calendar.get(Calendar.MONTH) + 1) + Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
         dataEq = Integer.parseInt(data.replaceAll("-", ""));
-        time1Eq = Integer.parseInt(time1.replaceAll(":", ""));
-        time2Eq = Integer.parseInt(time2.replaceAll(":", ""));
+        if (!time1.equals("")){
+            time1Eq = Integer.parseInt(time1.replaceAll(":", ""));
+        } else time1Eq=0;
+        if (!time2.equals("")) {
+            time2Eq = Integer.parseInt(time2.replaceAll(":", ""));
+        } else time2Eq=1;
         int i = 0;
         arrayList1.clear();
         if (data.equals("") || time1.equals("") || time2.equals("")) {
@@ -95,7 +99,7 @@ public class OrderController {
             i++;
             arrayList1.add(NOTWORK);
         }
-        if (time2.equals(time1)) {
+        if (time2.equals(time1)&&(!time1.equals(""))&&(!time2.equals(""))){
             i++;
             arrayList1.add(TIME_EQUALS);
         }
@@ -116,7 +120,7 @@ public class OrderController {
                     String data, String time1, String time2, long status, long nameStuff,
             long service, long customer) {
         if (errorMessage(data, time1, time2, status, customer) == 0) {
-            this.status = true;
+            setStatus(true);
             Order order = new Order(data, time1, time2);
             Statuses status_bd = new Statuses();
             Stuff stuff = new Stuff();
@@ -132,7 +136,7 @@ public class OrderController {
             order.setService(services);
             orderRepository.save(order);
 
-        } else this.status = false;
+        } else setStatus(false);
 
         return "redirect:/order";
     }
@@ -161,9 +165,10 @@ public class OrderController {
         arrayList1.clear();
     }
 
-    public void setStatusTrue() {
-        this.status = true;
+    public static void setStatus(Boolean statuses) {
+        status = statuses;
     }
+
 
     @PostMapping("{id}/edit")
     public String updateOrderPage(@PathVariable(value = "id") long id, @RequestParam
@@ -186,12 +191,12 @@ public class OrderController {
             order.setStuff_name(stuff_db);
             order.setService(service_db);
             order.setCustomers_name(customer_db);
-            setStatusTrue();
+            setStatus(true);
             setAttributeErrorTrue(model);
             orderRepository.save(order);
             return "redirect:/order";
         } else {
-            this.status = false;
+            setStatus(false);
             showUpdateOrderPage(id, model);
             setAttributeError(model);
             return "order/updateOrderPage";
